@@ -4,29 +4,40 @@ import PropTypes from 'prop-types';
 
 import { ImageGridContext } from './GridProvider';
 import Image from './Image';
-import TwoImages from './TwoImages';
+import { LAYOUT_COLUMN, LAYOUT_ROW } from './helpers';
+import { Five, Four, Six, Three, Two } from './GroupImage';
 
 const Grid = () => {
-  const { data, width, containerStyle } = useContext(ImageGridContext);
+  const { data, width, containerStyle, length } = useContext(ImageGridContext);
 
-  const renderImage = () => {
-    switch (data.length) {
-      case 2:
-        return <TwoImages />;
-      default:
-        return (
-          <Image
-            image={data[0]}
-            imageStyle={{
-              width,
-              height: width,
-            }}
-          />
-        );
+  const renderGroup = () => {
+    if (length >= 2) {
+      switch (length) {
+        case 3:
+          return <Three />;
+        case 4:
+          return <Four />;
+        case 5:
+          return <Five />;
+        case 6:
+          return <Six />;
+        default:
+          //default is 2
+          return <Two />;
+      }
     }
+    return (
+      <Image
+        image={data[0]}
+        imageStyle={{
+          height: width,
+          width,
+        }}
+      />
+    );
   };
 
-  return <View style={[style.container, containerStyle]}>{renderImage()}</View>;
+  return <View style={[style.container, containerStyle]}>{renderGroup()}</View>;
 };
 
 export default Grid;
