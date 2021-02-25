@@ -1,33 +1,51 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import { ImageGridContext } from '../GridProvider';
-import { LAYOUT_ROW } from '../helpers';
+import { LAYOUT_COLUMN, LAYOUT_ROW_SQUARE } from '../helpers';
 import Image from '../Image';
 
-const Two = () => {
-  const { data, width, layout, spaceSize } = useContext(ImageGridContext);
+const Two = ({ layoutProps, dataProps }) => {
+  const { data: dataMain, width, layout: layoutMain, spaceSize } = useContext(
+    ImageGridContext
+  );
 
-  useEffect(() => {}, []);
+  const data = dataProps || dataMain;
+  const layoutChange = layoutProps || layoutMain;
+  const layout = layoutProps || layoutChange.match('row') ? 'row' : 'column';
+  const widthCommon = width / 2 - spaceSize / 2;
 
   const handleStyle = () => {
-    const style = {
-      width: width / 2 - spaceSize / 2,
-      height: width / 2,
-    };
-    if (layout === LAYOUT_ROW) {
-      style.width = width / 2 - spaceSize / 2;
-      style.height = width;
-    } else {
-      style.width = width;
-      style.height = width / 2 - spaceSize / 2;
+    let widthShape = widthCommon;
+    let heightShape = width;
+
+    switch (layoutChange) {
+      case LAYOUT_ROW_SQUARE:
+        widthShape = widthCommon;
+        heightShape = widthCommon;
+        break;
+      case LAYOUT_COLUMN:
+        widthShape = width;
+        heightShape = widthCommon;
+        break;
+      default:
     }
-    return style;
+    return {
+      width: widthShape,
+      height: heightShape,
+    };
   };
 
   return (
     <View
-      style={[style.container, { width, height: width, flexDirection: layout }]}
+      style={[
+        style.container,
+        {
+          width,
+          height: layoutChange === LAYOUT_ROW_SQUARE ? widthCommon : width,
+          flexDirection: layout,
+        },
+      ]}
     >
       {data.map((item, index) => {
         return (

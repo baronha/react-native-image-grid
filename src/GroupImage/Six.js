@@ -40,14 +40,14 @@ const Six = () => {
       ]}
     >
       <View style={[style.container, { flexDirection: 'row' }]}>
-        <Image image={data[0]} imageStyle={handleStyleMain()} />
+        <Image image={data[0]} imageStyle={handleStyleMain()} index={0} />
         <View style={[style.container, { flexDirection: 'column' }]}>
           {[...data].splice(1, 2).map((item, index) => {
             return (
               <Image
                 key={index}
                 image={item}
-                index={index}
+                index={index + 1}
                 imageStyle={handleStyleSub()}
               />
             );
@@ -60,7 +60,7 @@ const Six = () => {
             <Image
               key={index}
               image={item}
-              index={index}
+              index={index + 3}
               imageStyle={handleStyleSub()}
             />
           );

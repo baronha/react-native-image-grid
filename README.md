@@ -1,22 +1,17 @@
 # react-native-image-grid
 
-Display images like Facebook App.
+Display images grid like Facebook App.
 
 ## Installation
 
 ```sh
-npm install react-native-image-grid
+npm i @baronha/react-native-image-grid
+or
+yarn add @baronha/react-native-image-grid
 ```
-
 ## Usage
 
-```js
-import ImageGrid from "react-native-image-grid";
-
-// ...
-
-const result = await ImageGrid.multiply(3, 7);
-```
+```...UPDATING```
 
 ## Contributing
 

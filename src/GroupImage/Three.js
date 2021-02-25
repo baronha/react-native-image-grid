@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import { ImageGridContext } from '../GridProvider';
@@ -13,14 +13,17 @@ const Three = () => {
 
   const commonSize = width / 2 - spaceSize / 2;
 
-  useEffect(() => {}, []);
-
   const handleStyleMain = () => {
-    const style = {
-      width: commonSize,
-      height: width,
+    let widthShape = commonSize;
+    let heightShape = width;
+    if (layout === LAYOUT_COLUMN) {
+      widthShape = width;
+      heightShape = commonSize;
+    }
+    return {
+      width: widthShape,
+      height: heightShape,
     };
-    return style;
   };
 
   const handleStyleSub = () => {
@@ -44,7 +47,7 @@ const Three = () => {
             <Image
               key={index}
               image={item}
-              index={index}
+              index={index + 1}
               imageStyle={handleStyleSub()}
             />
           );
