@@ -9,8 +9,9 @@ export const ImageGridContext = createContext();
 const { width: windowWidth } = Dimensions.get('window');
 
 const GridProvider = (props) => {
-  const { data, maximum } = props;
+  const { dataImage, maximum } = props;
 
+  const data = [...dataImage];
   const length = maximum > data.length ? data.length : maximum;
   const remain = data.length - length;
   data.length = length > 6 ? 6 : length;
@@ -22,6 +23,7 @@ const GridProvider = (props) => {
     layout,
     length,
     remain,
+    data,
   };
 
   if (data.length) {
@@ -37,7 +39,7 @@ const GridProvider = (props) => {
 export default GridProvider;
 
 GridProvider.propTypes = {
-  data: PropTypes.array.isRequired,
+  dataImage: PropTypes.array.isRequired,
   sourceKey: PropTypes.string,
   width: PropTypes.number,
   colorLoader: PropTypes.any,
@@ -55,7 +57,7 @@ GridProvider.propTypes = {
 };
 
 GridProvider.defaultProps = {
-  data: [],
+  dataImage: [],
   colorLoader: [
     '#fcf8e8',
     '#d4e2d4',

@@ -1,5 +1,4 @@
-/* eslint-disable react-native/no-inline-styles */
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Text, Image as RNImage, View, StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import PropTypes from 'prop-types';
@@ -31,8 +30,6 @@ const Image = (props) => {
   const isVideo = image?.[videoKey] === conditionCheckVideo;
   const size = Math.round(width / (index + length * 2));
 
-  const [loading, setLoading] = useState(true);
-
   const handleBackgroundColor = () => {
     if (typeof colorLoader === 'string') {
       return colorLoader;
@@ -48,16 +45,6 @@ const Image = (props) => {
   };
 
   const backgroundColor = handleBackgroundColor();
-
-  const onLoad = (event) => {
-    props.onLoad(event);
-  };
-
-  const onLoadStart = () => {};
-
-  const onLoadEnd = () => {
-    setLoading(false);
-  };
 
   const onPress = () => {
     onPressImage(image, index);
@@ -75,12 +62,9 @@ const Image = (props) => {
         style={[
           imageStyle,
           {
-            backgroundColor: loading ? backgroundColor : 'transparent',
+            backgroundColor: backgroundColor,
           },
         ]}
-        onLoad={onLoad}
-        onLoadStart={onLoadStart}
-        onLoadEnd={onLoadEnd}
         resizeMode={'cover'}
       />
       {isVideo && index !== length - 1 && (
@@ -141,10 +125,7 @@ const style = StyleSheet.create({
 Image.propTypes = {
   image: PropTypes.any.isRequired,
   imageStyle: PropTypes.any,
-  onLoad: PropTypes.func,
   index: PropTypes.number,
 };
 
-Image.defaultProps = {
-  onLoad: () => {},
-};
+Image.defaultProps = {};
