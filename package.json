@@ -1,5 +1,5 @@
 {
-  "name": "react-native-image-grid",
+  "name": "@baronha/react-native-image-grid",
   "version": "0.1.0",
   "description": "Display images like Facebook App.",
   "main": "lib/commonjs/index",

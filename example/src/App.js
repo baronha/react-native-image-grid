@@ -9,7 +9,7 @@ import { StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native';
 
 import { StyleSheet } from 'react-native';
-import ImageGrid from 'react-native-image-grid';
+import ImageGrid from '@baronha/react-native-image-grid';
 
 const { width } = Dimensions.get('window');
 
