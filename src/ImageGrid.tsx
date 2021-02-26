@@ -2,7 +2,7 @@ import React, { createContext } from 'react';
 import { Dimensions } from 'react-native';
 import PropTypes, { InferProps } from 'prop-types';
 
-import Grid from './Grid';
+import Grid from './Grid.js';
 import { checkLayoutImage, LAYOUT_ROW } from './helpers';
 
 const { width: windowWidth } = Dimensions.get('window');
