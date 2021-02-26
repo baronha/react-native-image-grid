@@ -1,15 +1,18 @@
 import React, { createContext } from 'react';
 import { Dimensions } from 'react-native';
-import PropTypes from 'prop-types';
+import PropTypes, { InferProps } from 'prop-types';
 
 import Grid from './Grid';
 import { checkLayoutImage, LAYOUT_ROW } from './helpers';
-export const ImageGridContext = createContext();
 
 const { width: windowWidth } = Dimensions.get('window');
 
-const GridProvider = (props) => {
-  const { dataImage, maximum, widthKey, heightKey } = props;
+export const ImageGridContext = createContext({});
+
+export function ImageGrid(props: InferProps<typeof ImageGrid.propTypes>) {
+  const { dataImage, widthKey, heightKey } = props;
+
+  const maximum = props.maximum as number;
 
   const data = [...dataImage];
   const length = maximum > data.length ? data.length : maximum;
@@ -35,12 +38,10 @@ const GridProvider = (props) => {
     );
   }
   return null;
-};
+}
 
-export default GridProvider;
-
-GridProvider.propTypes = {
-  dataImage: PropTypes.array.isRequired,
+ImageGrid.propTypes = {
+  dataImage: PropTypes.any.isRequired,
   sourceKey: PropTypes.string,
   width: PropTypes.number,
   colorLoader: PropTypes.any,
@@ -60,7 +61,7 @@ GridProvider.propTypes = {
   widthKey: PropTypes.string,
 };
 
-GridProvider.defaultProps = {
+ImageGrid.defaultProps = {
   dataImage: [],
   colorLoader: [
     '#fcf8e8',
@@ -83,4 +84,6 @@ GridProvider.defaultProps = {
   conditionCheckVideo: true,
   heightKey: 'height',
   widthKey: 'width',
+  onPressImage: () => {},
+  emptyImageSource: require('./assets/emptyImage.png'),
 };

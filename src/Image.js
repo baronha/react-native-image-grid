@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text, Image as RNImage, View, StyleSheet } from 'react-native';
 import FastImage from 'react-native-fast-image';
 import PropTypes from 'prop-types';
 
-import { ImageGridContext } from './GridProvider';
+import { ImageGridContext } from './ImageGrid.tsx';
 import { TouchableOpacity } from 'react-native';
 
 const COLOR_GREY = '#323232';
@@ -26,6 +26,7 @@ const Image = (props) => {
     width,
     colorLoader,
     videoURLKey,
+    emptyImageSource,
   } = useContext(ImageGridContext);
   const isVideo = image?.[videoKey] === conditionCheckVideo;
   const uri =
@@ -55,8 +56,15 @@ const Image = (props) => {
 
   const backgroundColor = handleBackgroundColor();
 
+  const [isError, setError] = useState(false);
+
   const onPress = () => {
     onPressImage(image, index);
+  };
+
+  const onError = () => {
+    setError(true);
+    imageProps?.onError();
   };
 
   return (
@@ -67,13 +75,14 @@ const Image = (props) => {
     >
       <FastImage
         {...imageProps}
-        source={{ uri }}
+        source={!isError ? { uri } : emptyImageSource}
         style={[
           imageStyle,
           {
             backgroundColor: backgroundColor,
           },
         ]}
+        onError={onError}
         resizeMode={'cover'}
       />
       {isVideo && (remain === 0 || index !== length - 1) && (

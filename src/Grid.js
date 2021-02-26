@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import { ImageGridContext } from './GridProvider';
+import { ImageGridContext } from './ImageGrid.tsx';
 import Image from './Image';
 import { Five, Four, Six, Three, Two } from './GroupImage';
 

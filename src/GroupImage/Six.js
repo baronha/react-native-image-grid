@@ -2,7 +2,7 @@
 import React, { useContext, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import { ImageGridContext } from '../GridProvider';
+import { ImageGridContext } from '../ImageGrid.tsx';
 import Image from '../Image';
 
 const Six = () => {

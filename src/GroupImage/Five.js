@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 import { View, StyleSheet } from 'react-native';
 
-import { ImageGridContext } from '../GridProvider';
+import { ImageGridContext } from '../ImageGrid.tsx';
 import { LAYOUT_ROW_SQUARE } from '../helpers';
 import Image from '../Image';
 import Two from './Two';
