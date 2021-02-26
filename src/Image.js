@@ -25,10 +25,19 @@ const Image = (props) => {
     conditionCheckVideo,
     width,
     colorLoader,
+    videoURLKey,
   } = useContext(ImageGridContext);
-  const uri = typeof image === 'string' ? image : image[sourceKey];
   const isVideo = image?.[videoKey] === conditionCheckVideo;
-  const size = Math.round(width / (index + length * 2));
+  const uri =
+    typeof image === 'string'
+      ? image
+      : isVideo
+      ? image[videoURLKey]
+      : image[sourceKey];
+  const size =
+    index === 0 || index === 1
+      ? Math.round(width / 7)
+      : Math.round(width / (index + length * 2));
 
   const handleBackgroundColor = () => {
     if (typeof colorLoader === 'string') {
@@ -67,7 +76,7 @@ const Image = (props) => {
         ]}
         resizeMode={'cover'}
       />
-      {isVideo && index !== length - 1 && (
+      {isVideo && (remain === 0 || index !== length - 1) && (
         <View style={[style.overlay, { backgroundColor: backgroundMaskVideo }]}>
           <RNImage
             style={[

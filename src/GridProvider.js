@@ -9,13 +9,14 @@ export const ImageGridContext = createContext();
 const { width: windowWidth } = Dimensions.get('window');
 
 const GridProvider = (props) => {
-  const { dataImage, maximum } = props;
+  const { dataImage, maximum, widthKey, heightKey } = props;
 
   const data = [...dataImage];
   const length = maximum > data.length ? data.length : maximum;
   const remain = data.length - length;
   data.length = length > 6 ? 6 : length;
-  const layout = checkLayoutImage(data, length) || LAYOUT_ROW;
+  const layout =
+    checkLayoutImage(data, length, widthKey, heightKey) || LAYOUT_ROW;
 
   const value = {
     ...props,
@@ -53,7 +54,10 @@ GridProvider.propTypes = {
   numberRemainStyle: PropTypes.any,
   videoIconStyle: PropTypes.any,
   videoKey: PropTypes.string,
+  videoURLKey: PropTypes.string,
   conditionCheckVideo: PropTypes.any,
+  heightKey: PropTypes.string,
+  widthKey: PropTypes.string,
 };
 
 GridProvider.defaultProps = {
@@ -68,6 +72,7 @@ GridProvider.defaultProps = {
     '#f4eeed',
   ],
   sourceKey: 'url',
+  videoURLKey: 'url',
   width: windowWidth,
   spaceSize: 3,
   activeOpacity: 0.9,
@@ -76,4 +81,6 @@ GridProvider.defaultProps = {
   backgroundMaskVideo: 'rgba(0,0,0,0.6)',
   videoKey: 'isVideo',
   conditionCheckVideo: true,
+  heightKey: 'height',
+  widthKey: 'width',
 };
