@@ -27,6 +27,9 @@ const Image = (props) => {
     colorLoader,
     videoURLKey,
     emptyImageSource,
+    componentDelete,
+    showDelete,
+    onDeleteImage,
   } = useContext(ImageGridContext);
   const isVideo = image?.[videoKey] === conditionCheckVideo;
   const uri =
@@ -36,8 +39,10 @@ const Image = (props) => {
       ? image[videoURLKey]
       : image[sourceKey];
   const size =
-    index === 0 || index === 1
+    index === 0
       ? Math.round(width / 7)
+      : index === 1 && length === 2
+      ? Math.round(width / 9)
       : Math.round(width / (index + length * 2));
 
   const handleBackgroundColor = () => {
@@ -65,6 +70,10 @@ const Image = (props) => {
   const onError = () => {
     setError(true);
     imageProps?.onError();
+  };
+
+  const onDelete = () => {
+    onDeleteImage(image, index);
   };
 
   return (
@@ -115,6 +124,22 @@ const Image = (props) => {
           </Text>
         </View>
       )}
+      {showDelete &&
+        (componentDelete || (
+          <View style={style.componentDelete}>
+            <TouchableOpacity
+              style={style.buttonDelete}
+              activeOpacity={activeOpacity}
+              onPress={onDelete}
+            >
+              <FastImage
+                source={require('./assets/delete.png')}
+                style={style.deleteImage}
+                tintColor={'#fff'}
+              />
+            </TouchableOpacity>
+          </View>
+        ))}
     </TouchableOpacity>
   );
 };
@@ -136,6 +161,22 @@ const style = StyleSheet.create({
     fontFamily: 'Avenir',
   },
   videoIcon: {
+    tintColor: '#fff',
+  },
+  componentDelete: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+  },
+  buttonDelete: {
+    backgroundColor: 'rgba(0,0,0,0.2)',
+    paddingHorizontal: 8,
+    borderRadius: 4,
+    paddingVertical: 6,
+  },
+  deleteImage: {
+    width: 16,
+    height: 16,
     tintColor: '#fff',
   },
 });

@@ -31,6 +31,8 @@ export default function App() {
     } catch (e) {}
   };
 
+  const onDeleteImage = (item, index) => {};
+
   return (
     <View style={style.container}>
       <ScrollView contentContainerStyle={{ paddingTop: 132 }}>
@@ -42,6 +44,8 @@ export default function App() {
             heightKey={'Height'}
             // spaceSize={10}
             width={Dimensions.get('window').width - 6}
+            showDelete
+            onDeleteImage={onDeleteImage}
           />
           <ImageGrid
             dataImage={images}

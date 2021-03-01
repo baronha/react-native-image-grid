@@ -59,6 +59,9 @@ ImageGrid.propTypes = {
   conditionCheckVideo: PropTypes.any,
   heightKey: PropTypes.string,
   widthKey: PropTypes.string,
+  componentDelete: PropTypes.element,
+  onDeleteImage: PropTypes.func,
+  showDelete: PropTypes.bool,
 };
 
 ImageGrid.defaultProps = {
@@ -86,4 +89,6 @@ ImageGrid.defaultProps = {
   widthKey: 'width',
   onPressImage: () => {},
   emptyImageSource: require('./assets/emptyImage.png'),
+  showDelete: false,
+  onDeleteImage: () => {},
 };
