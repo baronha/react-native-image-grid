@@ -73,6 +73,9 @@ const Image = (props) => {
   };
 
   const onDelete = () => {
+    if (isError) {
+      setError(false);
+    }
     onDeleteImage(image, index);
   };
 
@@ -84,7 +87,7 @@ const Image = (props) => {
     >
       <FastImage
         {...imageProps}
-        source={!isError ? { uri } : emptyImageSource}
+        source={isError ? emptyImageSource : { uri }}
         style={[
           imageStyle,
           {

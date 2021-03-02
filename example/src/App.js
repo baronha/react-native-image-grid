@@ -25,6 +25,7 @@ export default function App() {
       const response = await ImagePicker.openPicker({
         selectedAssets: images,
         isExportThumbnail: true,
+        maxVideo: 1,
       });
       console.log(response);
       setImages(response);

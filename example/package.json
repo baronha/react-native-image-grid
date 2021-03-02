@@ -9,7 +9,7 @@
     "ios": "react-native run-ios --simulator='iPhone 11 Pro'"
   },
   "dependencies": {
-    "@baronha/react-native-multiple-image-picker": "^0.1.3",
+    "@baronha/react-native-multiple-image-picker": "^0.2.0",
     "react": "16.13.1",
     "react-native": "0.63.4",
     "react-native-fast-image": "^8.3.4"
