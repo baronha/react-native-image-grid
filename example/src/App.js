@@ -32,8 +32,6 @@ export default function App() {
     } catch (e) {}
   };
 
-  const onDeleteImage = (item, index) => {};
-
   return (
     <View style={style.container}>
       <ScrollView contentContainerStyle={{ paddingTop: 132 }}>
@@ -45,8 +43,9 @@ export default function App() {
             heightKey={'Height'}
             // spaceSize={10}
             width={Dimensions.get('window').width - 6}
-            showDelete
-            onDeleteImage={onDeleteImage}
+            ratioConstraint={1.6}
+            ratioOneImagePotrait={1.2}
+            ratioOneImageLandscape={1.6}
           />
           <ImageGrid
             dataImage={images}
@@ -120,39 +119,6 @@ const dataImageObject = [
     url:
       'https://images.unsplash.com/photo-1613922979078-70e49e3f0e72?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2734&q=80',
     Width: 500,
-    Height: 400,
-    isVideo: true,
-  },
-  {
-    url:
-      'https://images.unsplash.com/photo-1595787143151-e601da948ea8?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1950&q=80',
-    Width: 500,
-    Height: 400,
-    isVideo: true,
-  },
-  {
-    url:
-      'https://images.unsplash.com/photo-1613937696708-9c44f6f08cbf?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMzZ8fHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-    Width: 500,
-    Height: 400,
-  },
-  {
-    url:
-      'https://images.unsplash.com/photo-1613856933118-d82245801b41?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMjZ8fHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-    width: 500,
-    height: 400,
-  },
-  {
-    url:
-      'https://images.unsplash.com/photo-1613938862928-38748a9283de?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyMTN8fHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-    width: 500,
-    height: 400,
-  },
-  {
-    url:
-      'https://images.unsplash.com/photo-1613858749327-c09380ae8116?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMDR8fHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-    width: 500,
-    height: 400,
-    isVideo: true,
+    Height: 700,
   },
 ];
