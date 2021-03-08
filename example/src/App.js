@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, { useState } from 'react';
-import { Text } from 'react-native';
+import { Platform, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native';
 import { View } from 'react-native';
@@ -43,9 +43,9 @@ export default function App() {
             heightKey={'Height'}
             // spaceSize={10}
             width={Dimensions.get('window').width - 6}
-            ratioConstraint={1.6}
-            ratioOneImagePotrait={1.2}
-            ratioOneImageLandscape={1.6}
+            ratioImagePortrait={1.2}
+            ratioImageLandscape={1.618}
+            prefixPath={Platform.OS === 'android' ? 'file://' : ''}
           />
           <ImageGrid
             dataImage={images}
@@ -119,6 +119,6 @@ const dataImageObject = [
     url:
       'https://images.unsplash.com/photo-1613922979078-70e49e3f0e72?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2734&q=80',
     Width: 500,
-    Height: 700,
+    Height: 800,
   },
 ];

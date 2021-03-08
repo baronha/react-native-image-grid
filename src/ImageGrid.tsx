@@ -62,9 +62,9 @@ ImageGrid.propTypes = {
   componentDelete: PropTypes.element,
   onDeleteImage: PropTypes.func,
   showDelete: PropTypes.bool,
-  ratioConstraint: PropTypes.number,
-  ratioOneImagePotrait: PropTypes.number,
-  ratioOneImageLandscape: PropTypes.number,
+  ratioImagePotrait: PropTypes.number,
+  ratioImageLandscape: PropTypes.number,
+  prefixPath: PropTypes.string,
 };
 
 ImageGrid.defaultProps = {
@@ -94,7 +94,7 @@ ImageGrid.defaultProps = {
   emptyImageSource: require('./assets/emptyImage.png'),
   showDelete: false,
   onDeleteImage: () => {},
-  ratioConstraint: 1.618,
-  ratioOneImagePotrait: 1.618,
-  ratioOneImageLandscape: 1.618,
+  ratioImagePotrait: 1.618,
+  ratioImageLandscape: 1.2,
+  prefixPath: '',
 };

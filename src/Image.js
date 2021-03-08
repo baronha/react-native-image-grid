@@ -30,14 +30,16 @@ const Image = (props) => {
     componentDelete,
     showDelete,
     onDeleteImage,
+    prefixPath,
   } = useContext(ImageGridContext);
   const isVideo = image?.[videoKey] === conditionCheckVideo;
   const uri =
-    typeof image === 'string'
+    prefixPath +
+    (typeof image === 'string'
       ? image
       : isVideo
       ? image[videoURLKey]
-      : image[sourceKey];
+      : image[sourceKey]);
   const size =
     index === 0
       ? Math.round(width / 7)

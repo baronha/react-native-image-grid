@@ -10,9 +10,8 @@ const One = () => {
     width,
     heightKey,
     widthKey,
-    ratioOneImagePotrait,
-    ratioOneImageLandscape,
-    ratioConstraint,
+    ratioImagePortrait,
+    ratioOneLandscape,
   } = useContext(ImageGridContext);
 
   const handleStyle = () => {
@@ -24,13 +23,15 @@ const One = () => {
       let ratio = widthImage / heightImage;
       if (heightImage > widthImage) {
         ratio = heightImage / widthImage;
+        heightShape =
+          ratio > ratioImagePortrait
+            ? width * ratioImagePortrait
+            : ratio * width;
+      } else if (widthImage > heightImage) {
+        ratio = widthImage / heightImage;
+        heightShape =
+          ratio > ratioOneLandscape ? width / ratioOneLandscape : width / ratio;
       }
-      heightShape =
-        ratio > ratioConstraint
-          ? width
-          : heightImage > widthImage
-          ? width * ratioOneImagePotrait
-          : width / ratioOneImageLandscape;
     }
     return {
       width: widthShape,
