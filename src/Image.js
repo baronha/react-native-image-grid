@@ -31,6 +31,8 @@ const Image = (props) => {
     showDelete,
     onDeleteImage,
     prefixPath,
+    data,
+    backgroundColorKey,
   } = useContext(ImageGridContext);
   const isVideo = image?.[videoKey] === conditionCheckVideo;
   const uri =
@@ -48,6 +50,10 @@ const Image = (props) => {
       : Math.round(width / (index + length * 2));
 
   const handleBackgroundColor = () => {
+    const color = data?.[index]?.[backgroundColorKey];
+    if (color && typeof color === 'string') {
+      return color;
+    }
     if (typeof colorLoader === 'string') {
       return colorLoader;
     }

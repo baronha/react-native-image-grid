@@ -65,6 +65,7 @@ ImageGrid.propTypes = {
   ratioImagePortrait: PropTypes.number,
   ratioImageLandscape: PropTypes.number,
   prefixPath: PropTypes.string,
+  backgroundColorKey: PropTypes.string,
 };
 
 ImageGrid.defaultProps = {
@@ -97,4 +98,5 @@ ImageGrid.defaultProps = {
   ratioImagePortrait: 1.618,
   ratioImageLandscape: 1.2,
   prefixPath: '',
+  backgroundColorKey: 'backgroundColor',
 };
