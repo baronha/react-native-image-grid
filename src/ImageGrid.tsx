@@ -1,5 +1,5 @@
 import React, { createContext } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, Image } from 'react-native';
 import PropTypes, { InferProps } from 'prop-types';
 
 import Grid from './Grid.js';
@@ -66,6 +66,7 @@ ImageGrid.propTypes = {
   ratioImageLandscape: PropTypes.number,
   prefixPath: PropTypes.string,
   backgroundColorKey: PropTypes.string,
+  ImageWrap: PropTypes.elementType,
 };
 
 ImageGrid.defaultProps = {
@@ -99,4 +100,5 @@ ImageGrid.defaultProps = {
   ratioImageLandscape: 1.2,
   prefixPath: '',
   backgroundColorKey: 'backgroundColor',
+  ImageWrap: Image,
 };

@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { Text, Image as RNImage, View, StyleSheet } from 'react-native';
-import FastImage from 'react-native-fast-image';
 import PropTypes from 'prop-types';
 
 import { ImageGridContext } from './ImageGrid.tsx';
@@ -33,6 +32,7 @@ const Image = (props) => {
     prefixPath,
     data,
     backgroundColorKey,
+    ImageWrap,
   } = useContext(ImageGridContext);
   const isVideo = image?.[videoKey] === conditionCheckVideo;
   const uri =
@@ -93,7 +93,7 @@ const Image = (props) => {
       onPress={onPress}
       activeOpacity={activeOpacity}
     >
-      <FastImage
+      <ImageWrap
         {...imageProps}
         source={isError ? emptyImageSource : { uri }}
         style={[
@@ -143,7 +143,7 @@ const Image = (props) => {
               activeOpacity={activeOpacity}
               onPress={onDelete}
             >
-              <FastImage
+              <ImageWrap
                 source={require('./assets/delete.png')}
                 style={style.deleteImage}
                 tintColor={'#fff'}
