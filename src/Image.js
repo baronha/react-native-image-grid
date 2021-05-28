@@ -1,5 +1,12 @@
-import React, { useContext, useState } from 'react';
-import { Text, Image as RNImage, View, StyleSheet } from 'react-native';
+import React, { useContext, useRef, useState } from 'react';
+import {
+  Text,
+  Image as RNImage,
+  View,
+  StyleSheet,
+  Animated,
+  ActivityIndicator,
+} from 'react-native';
 import PropTypes from 'prop-types';
 
 import { ImageGridContext } from './ImageGrid.tsx';
@@ -34,7 +41,10 @@ const Image = (props) => {
     backgroundColorKey,
     ImageWrap,
   } = useContext(ImageGridContext);
+  const [loading, setLoading] = useState(true);
+  const opacity = useRef(new Animated.Value(0)).current;
   const isVideo = image?.[videoKey] === conditionCheckVideo;
+  const AnimatedImage = Animated.createAnimatedComponent(ImageWrap);
   const uri =
     prefixPath +
     (typeof image === 'string'
@@ -87,24 +97,41 @@ const Image = (props) => {
     onDeleteImage(image, index);
   };
 
+  const onLoadEnd = () => {
+    setLoading(false);
+    Animated.timing(opacity, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
   return (
     <TouchableOpacity
       style={[imageStyle]}
       onPress={onPress}
       activeOpacity={activeOpacity}
     >
-      <ImageWrap
-        {...imageProps}
-        source={isError ? emptyImageSource : { uri }}
-        style={[
-          imageStyle,
-          {
-            backgroundColor: backgroundColor,
-          },
-        ]}
-        onError={onError}
-        resizeMode={'cover'}
-      />
+      <View style={{ backgroundColor }}>
+        <AnimatedImage
+          {...imageProps}
+          source={isError ? emptyImageSource : { uri }}
+          style={[
+            imageStyle,
+            {
+              opacity,
+            },
+          ]}
+          onLoadEnd={onLoadEnd}
+          onError={onError}
+          resizeMode={'cover'}
+        />
+      </View>
+      {loading && (
+        <View style={style.overlay}>
+          <ActivityIndicator color={'#fff'} style={style.loading} />
+        </View>
+      )}
       {isVideo && (remain === 0 || index !== length - 1) && (
         <View style={[style.overlay, { backgroundColor: backgroundMaskVideo }]}>
           <RNImage
@@ -161,7 +188,6 @@ const style = StyleSheet.create({
   container: {},
   overlay: {
     ...StyleSheet.absoluteFill,
-    backgroundColor: 'red',
     alignItems: 'center',
     justifyContent: 'center',
   },
