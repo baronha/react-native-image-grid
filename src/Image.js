@@ -5,7 +5,6 @@ import {
   View,
   StyleSheet,
   Animated,
-  ActivityIndicator,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -41,7 +40,6 @@ const Image = (props) => {
     backgroundColorKey,
     ImageWrap,
   } = useContext(ImageGridContext);
-  const [loading, setLoading] = useState(true);
   const opacity = useRef(new Animated.Value(0)).current;
   const isVideo = image?.[videoKey] === conditionCheckVideo;
   const AnimatedImage = Animated.createAnimatedComponent(ImageWrap);
@@ -98,7 +96,6 @@ const Image = (props) => {
   };
 
   const onLoadEnd = () => {
-    setLoading(false);
     Animated.timing(opacity, {
       toValue: 1,
       duration: 500,
@@ -127,11 +124,6 @@ const Image = (props) => {
           resizeMode={'cover'}
         />
       </View>
-      {loading && (
-        <View style={style.overlay}>
-          <ActivityIndicator color={'#fff'} style={style.loading} />
-        </View>
-      )}
       {isVideo && (remain === 0 || index !== length - 1) && (
         <View style={[style.overlay, { backgroundColor: backgroundMaskVideo }]}>
           <RNImage
