@@ -1,11 +1,5 @@
-import React, { useContext, useRef, useState } from 'react';
-import {
-  Text,
-  Image as RNImage,
-  View,
-  StyleSheet,
-  Animated,
-} from 'react-native';
+import React, { useContext, useState } from 'react';
+import { Text, Image as RNImage, View, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { ImageGridContext } from './ImageGrid.tsx';
@@ -40,9 +34,7 @@ const Image = (props) => {
     backgroundColorKey,
     ImageWrap,
   } = useContext(ImageGridContext);
-  const opacity = useRef(new Animated.Value(0)).current;
   const isVideo = image?.[videoKey] === conditionCheckVideo;
-  const AnimatedImage = Animated.createAnimatedComponent(ImageWrap);
   const uri =
     prefixPath +
     (typeof image === 'string'
@@ -95,14 +87,6 @@ const Image = (props) => {
     onDeleteImage(image, index);
   };
 
-  const onLoadEnd = () => {
-    Animated.timing(opacity, {
-      toValue: 1,
-      duration: 500,
-      useNativeDriver: true,
-    }).start();
-  };
-
   return (
     <TouchableOpacity
       style={[imageStyle]}
@@ -110,16 +94,10 @@ const Image = (props) => {
       activeOpacity={activeOpacity}
     >
       <View style={{ backgroundColor }}>
-        <AnimatedImage
+        <ImageWrap
           {...imageProps}
           source={isError ? emptyImageSource : { uri }}
-          style={[
-            imageStyle,
-            {
-              opacity,
-            },
-          ]}
-          onLoadEnd={onLoadEnd}
+          style={imageStyle}
           onError={onError}
           resizeMode={'cover'}
         />
