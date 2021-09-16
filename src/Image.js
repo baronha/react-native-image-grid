@@ -89,7 +89,7 @@ const Image = (props) => {
 
   return (
     <TouchableOpacity
-      style={[imageStyle]}
+      style={[style.container, imageStyle]}
       onPress={onPress}
       activeOpacity={activeOpacity}
     >
@@ -155,7 +155,9 @@ const Image = (props) => {
 export default Image;
 
 const style = StyleSheet.create({
-  container: {},
+  container: {
+    overflow: 'hidden',
+  },
   overlay: {
     ...StyleSheet.absoluteFill,
     alignItems: 'center',
