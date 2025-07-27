@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 
 import { ImageGridContext } from '../ImageGrid.tsx';
 import { LAYOUT_ROW_SQUARE } from '../helpers';
-import Image from '../Image';
+import Image from '../Image.js';
 import Two from './Two';
 
 const Five = () => {
