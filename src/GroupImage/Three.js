@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 
 import { ImageGridContext } from '../ImageGrid.tsx';
 import { LAYOUT_COLUMN, LAYOUT_ROW } from '../helpers';
-import Image from '../Image';
+import Image from '../Image.js';
 
 const Three = () => {
   const { data, width, layout, spaceSize, length } = useContext(
